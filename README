@@ -1,0 +1,25 @@
+
+In vhost:
+
+    <Location />
+        PerlInitHandler  Apache2Handler::Timer
+        PerlLogHandler   Apache2Handler::Log
+    </Location>
+
+In DB:
+
+    CREATE TABLE IF NOT EXISTS `http_request_log` (
+        `id` int(11) NOT NULL auto_increment,
+        `url` varchar(255) collate utf8_bin NOT NULL,
+        `args` varchar(255) collate utf8_bin NOT NULL,
+        `useragent` varchar(255) collate utf8_bin NOT NULL,
+        `ip` int(10) unsigned NOT NULL,
+        `referrer` varchar(255) collate utf8_bin NOT NULL,
+        `ptime` decimal(22,5) NOT NULL,
+        `dbtime` decimal(22,5) NOT NULL,
+        `http_code` int(11) NOT NULL,
+        `bytes_sent` int(11) NOT NULL,
+        `logtime` timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
+        PRIMARY KEY (`id`)
+    ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
